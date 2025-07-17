@@ -1,0 +1,65 @@
+// Load external signing properties file from a secure location
+def externalPropertiesFile = new File("/Users/Rosep/Documents/AppKeys/CommonRoom/gradle.properties")
+if (externalPropertiesFile.exists()) {
+    def extProps = new Properties()
+    externalPropertiesFile.withReader('UTF-8') { reader ->
+        extProps.load(reader)
+    }
+    extProps.each { key, value ->
+        ext.set(key, value)
+    }
+} else {
+    println "External properties file not found: ${externalPropertiesFile.absolutePath}"
+}
+
+buildscript {
+    ext {
+        buildToolsVersion = findProperty('android.buildToolsVersion') ?: '35.0.0'
+        minSdkVersion = Integer.parseInt(findProperty('android.minSdkVersion') ?: '24')
+        compileSdkVersion = Integer.parseInt(findProperty('android.compileSdkVersion') ?: '35')
+        targetSdkVersion = Integer.parseInt(findProperty('android.targetSdkVersion') ?: '35')
+        kotlinVersion = findProperty('android.kotlinVersion') ?: '2.0.21'
+        ndkVersion = "26.1.10909125"
+    }
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.3'
+        classpath 'com.google.gms:google-services:4.4.1'
+        classpath('com.android.tools.build:gradle:8.1.2')
+        classpath('com.facebook.react:react-native-gradle-plugin')
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+    }
+}
+
+apply plugin: "com.facebook.react.rootproject"
+
+allprojects {
+    repositories {
+        maven {
+            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
+            url(new File(['node', '--print', "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), '../android'))
+        }
+        maven {
+            // Android JSC is installed from npm
+            url(new File(['node', '--print', "require.resolve('jsc-android/package.json', { paths: [require.resolve('react-native/package.json')] })"].execute(null, rootDir).text.trim(), '../dist'))
+        }
+        google()
+        mavenCentral()
+        maven { url 'https://www.jitpack.io' }
+    }
+    configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'org.jetbrains.kotlin') {
+                // Use rootProject.ext.kotlinVersion explicitly
+                details.useVersion rootProject.ext.kotlinVersion
+            }
+        }
+    }
+}
+
+
+
+

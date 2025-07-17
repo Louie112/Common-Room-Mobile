@@ -1,0 +1,70 @@
+{
+  "expo": {
+    "name": "Common Room",
+    "slug": "commonroom",
+    "version": "1.0.8",
+    "orientation": "portrait",
+    "icon": "./assets/images/newicon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "bundleIdentifier": "com.louie1124.test3"
+    },
+    "android": {
+      "package": "com.louie1124.test3",
+      "versionCode": 10,
+      "googleServicesFile": "./google-services.json",
+      "targetSdkVersion": 35,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/newicon.png",
+        "backgroundColor": "#1c0836"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static",
+      "favicon": "./assets/images/newicon.png"
+    },
+    "plugins": [
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth",
+      "@react-native-firebase/crashlytics",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#1c0836",
+          "image": "./assets/images/newicon.png",
+          "dark": {
+            "image": "./assets/images/newicon.png",
+            "backgroundColor": "#1c0836"
+          },
+          "imageWidth": 200
+        }
+      ],
+      "expo-router",
+      "expo-font"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "9ce083e4-ab76-4295-8074-ac6724c969a6"
+      }
+    }
+  }
+}

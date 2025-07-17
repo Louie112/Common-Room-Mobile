@@ -29,8 +29,8 @@ An android scheduling app to help users manage communal sharing of anything they
 [Goole Play Store](https://play.google.com/apps/testing/com.louie1124.test3)
 
 ## 📂 Getting Started
-Insert your google-services.json and GoogleService-Info.plist into root directory
-Configure your firebase in configs/firebaseConfig.tsx
+ - Insert your google-services.json and GoogleService-Info.plist into root directory
+ - Configure your firebase in configs/firebaseConfig.tsx
 
 ```bash
 git clone https://github.com/Louie112/Common-Room-Mobile

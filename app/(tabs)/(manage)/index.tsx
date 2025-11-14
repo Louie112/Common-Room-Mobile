@@ -486,7 +486,7 @@ export default function Manage() {
                           }}
                           onPress={() => removeSharedWithEmail(item.id)}
                         >
-                          <MaterialIcons name="close" size={70} color="red" />
+                          <MaterialIcons name="delete" size={70} color="red" />
                         </TouchableOpacity>
                       )}
                     </TouchableOpacity>
